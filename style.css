@@ -55,8 +55,8 @@ body{
 
 span{
     background: linear-gradient(
-        180deg,
-        #DF8908 10%
+        270deg,
+        #DF8908 10%,
         #ff1d15 100%
     );
     background-clip: text;
