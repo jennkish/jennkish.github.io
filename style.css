@@ -218,7 +218,7 @@ section{
 }
 
 .about-img img{
-    width: 20vw;
+    width: 32vw;
     border-radius: 50%;
     box-shadow: 0 0 25px var(--main-color);
     transition: 0.4s ease-in-out;
@@ -244,7 +244,7 @@ section{
 }
 
 ::-webkit-scrollbar{
-    width: 20px;
+    width: 15px;
 }
 
 ::-webkit-scrollbar-thumb{
