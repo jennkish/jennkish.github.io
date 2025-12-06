@@ -11,7 +11,7 @@
   --bg-color: #080808;
   --second-bg-color: #101010;
   --text-color: white;
-  --main-color: #0670e9;
+  --main-color: #0154b2;
 }
 html {
   font-size: 60%;
@@ -85,7 +85,7 @@ span{
     background: linear-gradient(
         270deg,
         #5497e4 10%,
-        #0670e9 100%
+        #0154b2 100%
     );
     letter-spacing: 1px;
     cursor: pointer;
