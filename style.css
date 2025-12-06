@@ -320,3 +320,7 @@ section{
 .skills-info i{
     font-size: 8rem;
 }
+
+.skills-info ip{
+    font-size: 2rem;
+}
