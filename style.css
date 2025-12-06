@@ -5,6 +5,7 @@
   text-decoration: none;
   scroll-behavior: smooth;
   font-family: "Poppins";
+  font-weight: bold;
 }
 :root {
   --bg-color: #080808;
