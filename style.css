@@ -219,7 +219,7 @@ section{
 
 .about-img img{
     width: 20vw;
-    border-radius: 65%;
+    border-radius: 50%;
     box-shadow: 0 0 25px var(--main-color);
     transition: 0.4s ease-in-out;
 }
