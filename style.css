@@ -316,7 +316,7 @@ section{
     justify-content: center;
     align-items: center;
     background-color: var(--second-bg-color);
-    height: 600px;
+    height: 2.4rem;
     border-radius: 3rem;
     cursor: pointer;
     border: 5px solid transparent;
