@@ -219,7 +219,7 @@ section{
 
 .about-img img{
     width: 25vw;
-    border: 50%;
+    border-radius: 50%;
     box-shadow: 0 0 25px var(--main-color);
     transition: 0.4s ease-in-out;
 }
@@ -240,7 +240,7 @@ section{
 }
 
 .about-content .btn{
-    margin: 3rem o;
+    margin: 3rem 0;
 }
 
 ::-webkit-scrollbar{
