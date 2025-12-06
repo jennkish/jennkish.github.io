@@ -59,4 +59,6 @@ span{
         #68b2ef 10%
         #087ddc 100%
     );
+    background-clip: text;
+    color: transparent;
 }
