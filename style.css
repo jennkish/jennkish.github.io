@@ -334,7 +334,7 @@ section{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     place-items: center;
-    gap: 3rem;
+    gap: 1rem;
     row-gap: 5rem;
 }
 
