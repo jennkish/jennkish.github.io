@@ -165,9 +165,9 @@ section{
 }
 
 .social-icons a:hover{
-    color: var(--main-color);
+    color: black;
     background-color: var(--main-color);
-    transform: scale(1.2)translate(-5px);
+    transform: scale(1.2) translateY(-5px);
     box-shadow: 0 0 25px var(--main-color);
 }
 
@@ -202,7 +202,7 @@ section{
     box-shadow: 0 0 25px transparent;
 }
 
-.btn-groupa:nth-of-type(2):hover{
+.btn-group a:nth-of-type(2):hover{
     box-shadow: 0 0 25px var(--main-color);
     background-color: var(--main-color);
     color: black;
@@ -272,8 +272,8 @@ section{
 
 .skills-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    align-items: stretch;
     gap: 2.5rem;
 }
 
@@ -282,7 +282,8 @@ section{
     justify-content: center;
     align-items: center;
     background-color: var(--main-color);
-    height: 600px;
+    height: 100%;
+    min-height: 600px;
     border-radius: 3rem;
     cursor: pointer;
     border: 5px solid transparent;
@@ -321,8 +322,10 @@ section{
     font-size: 8rem;
 }
 
-.skills-info ip{
+.skills-info p i{
     font-size: 2rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
 }
 
 
@@ -332,7 +335,7 @@ section{
 
 .projects-box{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, max(350px, 40%)), 1fr));
     place-items: center;
     gap: 3rem;
     row-gap: 2rem;
@@ -362,7 +365,9 @@ section{
 }
 
 .project-card img{
+    width: 100%;
     max-width: 300px;
+    aspect-ratio: 1 / 1;
     border-radius: 2rem;
     object-fit: cover;
 }

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720" role="img" aria-label="Smart Home - coming soon">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="55%" r="60%">
+      <stop offset="0%" stop-color="#0670e9" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#080808" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="720" fill="#080808"/>
+  <rect y="120" width="720" height="480" fill="url(#glow)"/>
+  <text x="360" y="85" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="56" fill="#ffffff">Smart Home</text>
+
+  <!-- house -->
+  <g fill="#101010" stroke="#5497e4" stroke-width="8" stroke-linejoin="round">
+    <path d="M200 330 L360 200 L520 330 V520 H200 Z"/>
+    <rect x="320" y="420" width="80" height="100" fill="#0154b2"/>
+  </g>
+  <!-- wifi signal -->
+  <g fill="none" stroke="#5497e4" stroke-width="10" stroke-linecap="round">
+    <path d="M300 330 Q360 285 420 330"/>
+    <path d="M325 358 Q360 333 395 358"/>
+  </g>
+  <circle cx="360" cy="382" r="10" fill="#5497e4"/>
+
+  <text x="360" y="365" text-anchor="middle" transform="rotate(-22 360 365)" font-family="'Courier New', monospace" font-weight="700" font-size="92" fill="#e8202a">COMING SOON</text>
+
+  <rect y="600" width="720" height="120" fill="#080808"/>
+  <text x="360" y="672" text-anchor="middle" font-family="'Courier New', monospace" font-size="44" letter-spacing="6" fill="#9a9a9a">HOME AUTOMATION</text>
+</svg>

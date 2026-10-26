@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720" role="img" aria-label="1992 Ford F150 - coming soon">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="55%" r="60%">
+      <stop offset="0%" stop-color="#0670e9" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#080808" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="720" fill="#080808"/>
+  <rect y="120" width="720" height="480" fill="url(#glow)"/>
+  <text x="360" y="85" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="56" fill="#ffffff">1992 Ford F150</text>
+
+  <!-- pickup truck -->
+  <g fill="#101010" stroke="#5497e4" stroke-width="8" stroke-linejoin="round">
+    <path d="M110 430 V360 Q110 345 125 345 H330 L370 270 Q377 258 392 258 H500 Q515 258 520 272 L548 345 H600 Q615 345 615 360 V430 Z"/>
+    <path d="M395 285 H495 L516 345 H368 Z" fill="#0154b2"/>
+    <line x1="330" y1="345" x2="330" y2="430"/>
+  </g>
+  <g fill="#080808" stroke="#5497e4" stroke-width="8">
+    <circle cx="210" cy="440" r="45"/>
+    <circle cx="520" cy="440" r="45"/>
+  </g>
+  <g fill="#5497e4">
+    <circle cx="210" cy="440" r="15"/>
+    <circle cx="520" cy="440" r="15"/>
+  </g>
+
+  <text x="360" y="365" text-anchor="middle" transform="rotate(-22 360 365)" font-family="'Courier New', monospace" font-weight="700" font-size="92" fill="#e8202a">COMING SOON</text>
+
+  <rect y="600" width="720" height="120" fill="#080808"/>
+  <text x="360" y="672" text-anchor="middle" font-family="'Courier New', monospace" font-size="44" letter-spacing="6" fill="#9a9a9a">TRUCK RESTORATION</text>
+</svg>
