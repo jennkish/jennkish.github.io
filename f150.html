@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1992 Ford F150 | Jennifer Kish</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="f150/f150.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:500,600,700,800" rel="stylesheet" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+
+    <header class="header">
+
+        <a href="index.html#home" class="logo">
+            Jennifer <span>Kish</span>
+        </a>
+
+        <i class="bx bx-menu" id="menu-icon"></i>
+
+        <nav class="navbar">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#skills">Skills</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+
+        <a href="index.html#contact" class="gradient-btn">Contact Me</a>
+
+    </header>
+
+    <main class="truck-page">
+
+      <section class="viewer-section" id="viewer">
+
+        <div class="viewer-top">
+          <div class="viewer-title">
+            <a href="index.html#projects" class="back-link"><i class="bx bx-arrow-back"></i> Back to Projects</a>
+            <h1>1992 Ford <span>F150</span></h1>
+            <p class="spec">SuperCab &middot; 8 ft Extended Bed &middot; 302 5.0L V8 &middot; 4x4 &middot; Automatic</p>
+          </div>
+
+          <div class="progress-summary" id="progress-summary"></div>
+        </div>
+
+        <div class="viewer" id="viewer-wrap">
+          <canvas id="truck-canvas" aria-label="Interactive 3D hologram of the truck"></canvas>
+          <div class="scanlines"></div>
+
+          <div class="system-filter" id="system-filter" role="toolbar" aria-label="Show a system"></div>
+
+          <div class="hover-label" id="hover-label"></div>
+
+          <aside class="part-panel" id="part-panel" aria-live="polite">
+            <button class="panel-close" id="panel-close" aria-label="Close part details"><i class="bx bx-x"></i></button>
+            <p class="panel-system" id="panel-system"></p>
+            <h3 id="panel-name"></h3>
+            <div id="panel-status"></div>
+            <dl class="panel-specs" id="panel-specs"></dl>
+            <div class="panel-photos" id="panel-photos"></div>
+            <p class="panel-note" id="panel-note"></p>
+          </aside>
+
+          <p class="viewer-hint" id="viewer-hint">Drag to rotate &middot; Scroll to zoom &middot; Hover and click a part to inspect it</p>
+
+          <div class="viewer-controls">
+            <button class="viewer-btn" id="status-toggle" aria-pressed="false"><i class="bx bx-palette"></i> Status colors</button>
+            <button class="viewer-btn" id="reset-view"><i class="bx bx-reset"></i> Full view</button>
+          </div>
+
+          <div class="viewer-message" id="viewer-message">Initializing hologram&hellip;</div>
+        </div>
+      </section>
+
+      <section class="build-log" id="build-log">
+        <h2 class="heading">Build <span>Log</span></h2>
+        <p class="log-intro">Every part of the truck, what it came with from the factory, and what I've replaced it with. Click any part to see it on the hologram.</p>
+        <div class="log-legend" id="log-legend"></div>
+        <div class="log-groups" id="log-groups"></div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="social-icons">
+          <a href="https://github.com/jennkish" target="_blank" rel="noopener" aria-label="GitHub">
+            <i class="bx bxl-github"></i>
+          </a>
+
+          <a href="https://www.linkedin.com/in/jennifer-kish-352308191/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <i class="bx bxl-linkedin-square"></i>
+          </a>
+        </div>
+
+        <ul class="list">
+          <li>
+            <a href="index.html#about">About Me</a>
+          </li>
+
+          <li>
+            <a href="index.html#skills">Skills</a>
+          </li>
+
+          <li>
+            <a href="index.html#projects">Projects</a>
+          </li>
+
+          <li>
+            <a href="index.html#contact">Contact</a>
+          </li>
+        </ul>
+
+        <p class="copyright">
+          © Jennifer Kish | All Rights Reserved
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="f150/parts.js"></script>
+    <script type="module" src="f150/viewer.js"></script>
+  </body>
+</html>

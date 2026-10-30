@@ -1,0 +1,504 @@
+.truck-page{
+    --holo: #3d8bff;
+    --holo-light: #c6ecff;
+    --muted: #8fa7c7;
+    --panel-bg: rgba(4, 10, 22, 0.88);
+    --status-original: #2f7bff;
+    --status-replaced: #38e1ff;
+    --status-in-progress: #ffb13d;
+    --status-planned: #9aa4bd;
+}
+
+.truck-page section{
+    min-height: auto;
+}
+
+/* ---------- Viewer ---------- */
+
+.viewer-section{
+    padding: 14rem 5% 6rem;
+    background: var(--bg-color);
+}
+
+.viewer-top{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem 4rem;
+    margin-bottom: 2.5rem;
+}
+
+.back-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #5497e4;
+    transition: 0.3s ease-in-out;
+}
+
+.back-link:hover{
+    color: var(--holo-light);
+}
+
+.viewer-title h1{
+    font-size: 5.5rem;
+    line-height: 1.15;
+    margin-top: 1rem;
+}
+
+.viewer-title .spec{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.progress-summary{
+    min-width: min(100%, 36rem);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.progress-summary strong{
+    color: var(--text-color);
+    font-size: 2.2rem;
+}
+
+.progress-bar{
+    display: flex;
+    height: 1rem;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: rgba(84, 151, 228, 0.15);
+    border: 1px solid rgba(84, 151, 228, 0.35);
+}
+
+.progress-bar i{
+    display: block;
+    height: 100%;
+}
+
+.progress-bar .seg-replaced{
+    background: var(--status-replaced);
+    box-shadow: 0 0 10px var(--status-replaced);
+}
+
+.progress-bar .seg-in-progress{
+    background: var(--status-in-progress);
+}
+
+.viewer{
+    position: relative;
+    height: clamp(480px, calc(100vh - 28rem), 900px);
+    border: 2px solid var(--main-color);
+    border-radius: 3rem;
+    overflow: hidden;
+    background: #03060c;
+    box-shadow: 0 0 25px rgba(1, 84, 178, 0.5);
+}
+
+#truck-canvas{
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    touch-action: none;
+}
+
+#truck-canvas.is-hovering{
+    cursor: pointer;
+}
+
+.scanlines{
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(90, 170, 255, 0.045) 0 1px,
+            transparent 1px 4px
+        ),
+        radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.system-filter{
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    right: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    pointer-events: none;
+}
+
+.chip,
+.viewer-btn{
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 0.6rem 1.4rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(84, 151, 228, 0.55);
+    background: rgba(3, 6, 12, 0.7);
+    color: #cfe3ff;
+    cursor: pointer;
+    transition: 0.25s ease-in-out;
+}
+
+.chip:hover,
+.viewer-btn:hover{
+    border-color: var(--holo-light);
+    box-shadow: 0 0 12px var(--main-color);
+}
+
+.chip.active,
+.viewer-btn[aria-pressed="true"]{
+    background: var(--main-color);
+    border-color: var(--main-color);
+    color: black;
+}
+
+.hover-label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    font-size: 1.4rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 1rem;
+    border: 1px solid #5497e4;
+    background: rgba(3, 6, 12, 0.85);
+    color: var(--holo-light);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.hover-label.show{
+    opacity: 1;
+}
+
+.viewer-hint{
+    position: absolute;
+    left: 2rem;
+    bottom: 2rem;
+    max-width: 50%;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #7f9cc4;
+    pointer-events: none;
+}
+
+.viewer-controls{
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    display: flex;
+    gap: 0.8rem;
+}
+
+.viewer-message{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--holo-light);
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+.viewer-message.hidden{
+    opacity: 0;
+}
+
+/* ---------- Part panel ---------- */
+
+.part-panel{
+    position: absolute;
+    top: 7rem;
+    right: 2rem;
+    bottom: 7rem;
+    width: min(38rem, calc(100% - 4rem));
+    padding: 3rem 2.5rem;
+    overflow-y: auto;
+    border: 1px solid var(--holo);
+    border-radius: 2rem;
+    background: var(--panel-bg);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 25px rgba(1, 84, 178, 0.6);
+    transform: translateX(calc(100% + 3rem));
+    transition: transform 0.4s ease;
+}
+
+.part-panel.open{
+    transform: none;
+}
+
+.panel-close{
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.panel-close:hover{
+    color: var(--holo-light);
+}
+
+.panel-system{
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #5497e4;
+}
+
+.part-panel h3{
+    font-size: 2.6rem;
+    line-height: 1.2;
+    margin: 0.6rem 3rem 1.2rem 0;
+}
+
+.panel-specs{
+    margin-top: 2rem;
+}
+
+.panel-specs dt{
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 1.6rem;
+}
+
+.panel-specs dd{
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-top: 0.3rem;
+}
+
+.panel-specs dd.replaced{
+    color: var(--status-replaced);
+}
+
+.panel-photos{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.panel-photos figure{
+    margin: 0;
+}
+
+.panel-photos img{
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 1px solid rgba(84, 151, 228, 0.4);
+}
+
+.panel-photos figcaption{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 0.4rem;
+}
+
+.panel-note{
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.panel-note:empty{
+    display: none;
+}
+
+/* ---------- Status badges ---------- */
+
+.status-badge{
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.3rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+}
+
+.status-original{ color: var(--status-original); }
+.status-replaced{ color: var(--status-replaced); }
+.status-in-progress{ color: var(--status-in-progress); }
+.status-planned{ color: var(--status-planned); }
+
+/* ---------- Build log ---------- */
+
+.build-log{
+    padding: 8rem 5% 10rem;
+    background: var(--second-bg-color);
+}
+
+.build-log .heading{
+    margin: 0 0 2rem;
+}
+
+.log-intro{
+    max-width: 70rem;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.log-legend{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 3rem 0 4rem;
+}
+
+.log-groups{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 38rem), 1fr));
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.log-group{
+    padding: 2.5rem;
+    border: 2px solid var(--main-color);
+    border-radius: 2rem;
+    background: var(--bg-color);
+    box-shadow: 0 0 5px var(--main-color);
+}
+
+.log-group h3{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2.1rem;
+    margin-bottom: 1rem;
+}
+
+.log-group h3 i{
+    font-size: 2.6rem;
+    color: #5497e4;
+}
+
+.log-row{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 1.1rem 0.8rem;
+    text-align: left;
+    color: var(--text-color);
+    background: transparent;
+    border: none;
+    border-top: 1px solid rgba(84, 151, 228, 0.18);
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.log-row:hover{
+    background: rgba(1, 84, 178, 0.18);
+}
+
+.log-row.active{
+    background: rgba(1, 84, 178, 0.35);
+}
+
+.log-row b{
+    display: block;
+    font-size: 1.6rem;
+}
+
+.log-row small{
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 0.2rem;
+}
+
+.log-row small.replaced{
+    color: var(--status-replaced);
+}
+
+@media (max-width: 700px){
+    .viewer-title h1{
+        font-size: 4.2rem;
+    }
+
+    .viewer{
+        height: 75vh;
+        border-radius: 2rem;
+    }
+
+    .system-filter{
+        top: 1.2rem;
+        left: 1.2rem;
+        right: 1.2rem;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        pointer-events: auto;
+        scrollbar-width: none;
+    }
+
+    .system-filter::-webkit-scrollbar{
+        display: none;
+    }
+
+    .chip{
+        flex: none;
+    }
+
+    .viewer-hint{
+        display: none;
+    }
+
+    .viewer-controls{
+        left: 1.2rem;
+        right: auto;
+        bottom: 1.2rem;
+    }
+
+    .part-panel{
+        top: auto;
+        left: 1.2rem;
+        right: 1.2rem;
+        bottom: 1.2rem;
+        width: auto;
+        max-height: 58%;
+        transform: translateY(calc(100% + 3rem));
+    }
+}
