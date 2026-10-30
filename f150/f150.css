@@ -442,7 +442,7 @@
     font-size: 1.6rem;
 }
 
-.log-row small{
+.log-row div small{
     display: block;
     font-size: 1.3rem;
     font-weight: 500;
@@ -450,7 +450,7 @@
     margin-top: 0.2rem;
 }
 
-.log-row small.replaced{
+.log-row div small.replaced{
     color: var(--status-replaced);
 }
 
