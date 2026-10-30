@@ -34,7 +34,7 @@ window.F150_BUILD = {
     // ---- Body & Exterior
     { id: "hood",          system: "body", name: "Hood",                 original: "Factory steel hood",                        status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "grille",        system: "body", name: "Grille",               original: "Factory grille",                            status: "original", replacedWith: "", date: "", notes: "", photos: [] },
-    { id: "headlights",    system: "body", name: "Headlights",           original: "Factory aero composite headlights",         status: "original", replacedWith: "", date: "", notes: "", photos: [] },
+    { id: "headlights",    system: "body", name: "Headlights",           original: "Factory aero composite headlights",         status: "replaced", replacedWith: "New OE Headlight Assembly", date: "2024", notes: "", photos: ["f150/photos/headlights.jpg"] },
     { id: "front-bumper",  system: "body", name: "Front Bumper",         original: "Factory chrome front bumper",               status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "front-fenders", system: "body", name: "Front Fenders",        original: "Factory steel fenders",                     status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "cab",           system: "body", name: "Cab & Roof",           original: "Factory SuperCab body",                     status: "original", replacedWith: "", date: "", notes: "", photos: [] },
@@ -42,7 +42,7 @@ window.F150_BUILD = {
     { id: "windshield",    system: "body", name: "Windshield",           original: "Factory laminated windshield",              status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "rear-window",   system: "body", name: "Rear Window",          original: "Factory rear glass",                        status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "mirrors",       system: "body", name: "Side Mirrors",         original: "Factory side mirrors",                      status: "original", replacedWith: "", date: "", notes: "", photos: [] },
-    { id: "bed",           system: "body", name: "Bed (8 ft)",           original: "Factory 8 ft Styleside bed",                status: "original", replacedWith: "", date: "", notes: "", photos: [] },
+    { id: "bed",           system: "body", name: "Bed (8 ft)",           original: "Factory 8 ft Styleside bed",                status: "in progress", replacedWith: "", date: "2025", notes: "Sandblasted bottom side and repainted", photos: [] },
     { id: "tailgate",      system: "body", name: "Tailgate",             original: "Factory tailgate",                          status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "taillights",    system: "body", name: "Taillights",           original: "Factory taillight assemblies",              status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "rear-bumper",   system: "body", name: "Rear Bumper",          original: "Factory rear step bumper",                  status: "original", replacedWith: "", date: "", notes: "", photos: [] },

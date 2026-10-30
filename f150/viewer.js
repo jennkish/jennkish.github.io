@@ -16,7 +16,11 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const statusKey = p => (STATUS[p.status] ? p.status : 'original');
+// Accept "in progress", "In-Progress", etc.
+const statusKey = p => {
+    const k = String(p.status ?? '').trim().toLowerCase().replace(/\s+/g, '-');
+    return STATUS[k] ? k : 'original';
+};
 const badge = p => `<small class="status-badge status-${statusKey(p)}">${STATUS[statusKey(p)].label}</small>`;
 
 let viewer = null;
