@@ -411,7 +411,12 @@ async function initViewer() {
     // Drivetrain
     rod('transmission', [4.85, 2.4, 0], [4.1, 2.28, 0], 0.78, 0.55);
     rod('transmission', [4.1, 2.28, 0], [1.95, 2.0, 0], 0.48, 0.33);
-    box('transmission', 2.4, 3.9, 1.65, 1.9, -0.4, 0.4);
+    box('trans-pan', 2.4, 3.9, 1.65, 1.9, -0.4, 0.4);
+    box('trans-pan-gasket', 2.34, 3.96, 1.88, 1.93, -0.46, 0.46);
+    box('trans-filter', 2.6, 3.7, 1.7, 1.82, -0.3, 0.3);
+    for (const x of [2.5, 2.95, 3.4, 3.85]) {
+        for (const s of [1, -1]) rod('trans-pan-bolts', [x, 1.95, s * 0.43], [x, 1.82, s * 0.43], 0.035, 0.035, 6);
+    }
 
     // 4x4: transfer case behind the transmission drives the rear axle and,
     // through a driver-side front driveshaft, the Dana 44 front differential.
@@ -421,8 +426,21 @@ async function initViewer() {
     add('front-axle', new THREE.SphereGeometry(0.4, 20, 14), [FRONT_X, WHEEL_Y, -0.5]);
     rod('front-axle', [FRONT_X, 1.22, -0.5], [5.55, 1.25, -0.5], 0.14, 0.11);
     rod('driveshaft', [0.6, 1.9, 0], [-2.4, 1.62, 0.08], 0.1);
-    add('driveshaft', new THREE.SphereGeometry(0.17, 12, 8), [-2.4, 1.62, 0.08]);
     rod('driveshaft', [-2.4, 1.62, 0.08], [-6.25, 1.3, 0.15], 0.1);
+    add('carrier-bearing', new THREE.SphereGeometry(0.17, 12, 8), [-2.4, 1.62, 0.08]);
+    box('carrier-bearing', -2.5, -2.3, 1.7, 1.95, -0.2, 0.35);
+    rod('driveshaft-yoke', [0.62, 1.9, 0], [0.3, 1.87, 0], 0.12);
+    rod('driveshaft-yoke', [1.95, 1.65, -0.5], [2.3, 1.61, -0.5], 0.11);
+
+    // U-joints are drawn as small crosses around the shaft they sit on.
+    function ujoint(id, pos, alongZ) {
+        box(id, pos[0] - 0.03, pos[0] + 0.03, pos[1] - 0.15, pos[1] + 0.15, pos[2] - 0.03, pos[2] + 0.03);
+        if (alongZ) box(id, pos[0] - 0.15, pos[0] + 0.15, pos[1] - 0.03, pos[1] + 0.03, pos[2] - 0.03, pos[2] + 0.03);
+        else box(id, pos[0] - 0.03, pos[0] + 0.03, pos[1] - 0.03, pos[1] + 0.03, pos[2] - 0.15, pos[2] + 0.15);
+    }
+    [[0.2, 1.86, 0.01], [-2.15, 1.64, 0.07], [-2.65, 1.6, 0.09], [-6.1, 1.31, 0.15], [2.45, 1.59, -0.5], [5.45, 1.26, -0.5]]
+        .forEach(p => ujoint('driveshaft-ujoints', p, false));
+    for (const s of [1, -1]) ujoint('axle-ujoints', [FRONT_X, WHEEL_Y, s * 1.95], true);
 
     // Engine: 302 V8. The block is a V-shaped front profile extruded front to back.
     add('engine-block', new THREE.ExtrudeGeometry(shape([
@@ -438,6 +456,11 @@ async function initViewer() {
     add('intake-manifold', new THREE.BoxGeometry(2.0, 0.32, 0.6), [5.95, 3.62, 0]);
     rod('intake-manifold', [6.95, 3.62, 0], [7.25, 3.6, 0], 0.17);
     box('oil-pan', 5.0, 6.95, 1.62, 1.98, -0.65, 0.65);
+    box('oil-pan-gasket', 4.95, 7.0, 1.96, 2.01, -0.72, 0.72);
+    box('oil-pump', 6.3, 6.7, 1.8, 1.97, -0.35, -0.05);
+    tube('oil-pickup-tube', [[6.4, 1.82, -0.2], [6.15, 1.72, -0.1], [5.8, 1.69, 0.1]], 0.04);
+    add('oil-pickup-tube', new THREE.CylinderGeometry(0.18, 0.18, 0.04, 16), [5.7, 1.68, 0.15]);
+    for (const s of [1, -1]) box('motor-mounts', 5.5, 5.9, 2.0, 2.3, s > 0 ? 1.05 : -1.35, s > 0 ? 1.35 : -1.05);
     box('water-pump', 7.0, 7.22, 2.15, 3.15, -0.62, 0.62);
     rod('water-pump', [7.22, 2.85, 0], [7.42, 2.85, 0], 0.26);
     rod('water-pump', [7.22, 2.3, 0], [7.34, 2.3, 0], 0.3);
@@ -447,9 +470,33 @@ async function initViewer() {
         add('cooling-fan', new THREE.BoxGeometry(0.04, 0.7, 0.22), [7.55, 2.85 + 0.42 * Math.cos(a), 0.42 * Math.sin(a)], [a, 0.3, 0]);
     }
     box('radiator', 7.95, 8.15, 2.2, 4.0, -1.45, 1.45);
-    tube('radiator', [[7.95, 3.7, 0.9], [7.6, 3.5, 0.6], [7.15, 3.2, 0.3]], 0.07);
+    rod('radiator-cap', [8.05, 4.0, 0.9], [8.05, 4.16, 0.9], 0.12);
+    tube('radiator-hoses', [[7.95, 3.7, 0.9], [7.6, 3.5, 0.6], [7.2, 3.2, 0.3]], 0.07);
+    tube('radiator-hoses', [[7.95, 2.4, -0.9], [7.6, 2.35, -0.6], [7.3, 2.3, -0.2]], 0.07);
+    rod('thermostat', [6.98, 3.2, 0.3], [7.2, 3.2, 0.3], 0.1);
+    tube('water-pump-hoses', [[7.1, 2.6, 0.5], [6.8, 3.0, 1.0], [5.5, 3.5, 1.6], [4.9, 3.6, 1.7]], 0.05);
+    tube('water-pump-hoses', [[7.0, 2.9, 0.35], [6.6, 3.3, 0.9], [5.5, 3.65, 1.85], [4.9, 3.75, 1.9]], 0.05);
+    box('coolant', 6.5, 7.0, 3.2, 3.75, -2.6, -2.1); // overflow reservoir
     box('air-intake', 7.0, 7.85, 3.3, 3.85, 1.8, 2.7);
     tube('air-intake', [[7.1, 3.6, 1.8], [7.15, 3.7, 0.9], [7.25, 3.62, 0.2]], 0.14);
+    tube('vacuum-lines', [[5.3, 3.78, -0.2], [5.1, 3.9, -0.8], [4.95, 3.6, -1.45]], 0.03);
+    tube('vacuum-lines', [[6.3, 3.78, 0.25], [6.5, 3.9, 0.8], [6.6, 3.8, 1.3]], 0.03);
+    tube('vacuum-lines', [[6.8, 3.78, -0.2], [6.95, 3.85, -0.3], [7.05, 3.7, -0.35]], 0.03);
+    box('egr-solenoid', 6.5, 6.75, 3.65, 3.85, 1.3, 1.55);
+
+    // Brake booster and master cylinder on the driver-side firewall
+    rod('brake-booster', [4.85, 3.4, -1.95], [5.45, 3.4, -1.95], 0.4);
+    box('master-cylinder', 5.45, 6.1, 3.25, 3.55, -2.1, -1.8);
+    box('master-cylinder', 5.6, 6.0, 3.55, 3.75, -2.08, -1.82);
+    for (const s of [1, -1]) {
+        rod('bleeder-screws', [5.56, 1.6, s * 2.2], [5.56, 1.74, s * 2.2], 0.04, 0.04, 6);
+        rod('bleeder-screws', [REAR_X, 1.75, s * 2.0], [REAR_X + 0.05, 1.89, s * 2.0], 0.04, 0.04, 6);
+    }
+
+    // Sway bars
+    tube('front-sway-bar', [[6.3, 1.3, -1.75], [7.0, 1.72, -1.65], [7.15, 1.78, 0], [7.0, 1.72, 1.65], [6.3, 1.3, 1.75]], 0.055);
+    tube('rear-sway-bar', [[-6.6, 1.15, -1.4], [-7.5, 1.05, -1.2], [-7.6, 1.05, 0], [-7.5, 1.05, 1.2], [-6.6, 1.15, 1.4]], 0.05);
+    for (const s of [1, -1]) rod('rear-sway-bar', [-7.5, 1.05, s * 1.2], [-7.5, 1.55, s * 1.4], 0.035);
 
     // Electrical
     box('battery', 7.25, 7.95, 3.0, 3.6, -2.7, -2.05);
@@ -457,10 +504,25 @@ async function initViewer() {
     rod('starter', [4.8, 2.1, 1.0], [5.45, 2.1, 1.0], 0.17);
     rod('distributor', [7.08, 3.15, -0.35], [7.08, 3.55, -0.35], 0.12);
     rod('distributor', [7.08, 3.55, -0.35], [7.08, 3.75, -0.35], 0.24, 0.2);
+    for (const s of [1, -1]) {
+        [5.5, 5.95, 6.4, 6.85].forEach(x => rod('spark-plugs', [x, 3.05, s * 1.2], [x, 3.15, s * 1.5], 0.04, 0.04, 8));
+    }
 
     // Fuel & exhaust
     box('fuel-tanks', -4.6, -2.1, 1.5, 2.2, -2.85, -1.6);
     box('fuel-tanks', -9.85, -7.95, 1.45, 2.15, -1.25, 1.25);
+    for (const x of [-4.0, -2.7]) {
+        box('fuel-tank-straps', x - 0.06, x + 0.06, 1.44, 1.5, -2.91, -1.55);
+        box('fuel-tank-straps', x - 0.06, x + 0.06, 1.44, 2.2, -2.91, -2.85);
+    }
+    for (const x of [-9.4, -8.4]) box('fuel-tank-straps', x - 0.06, x + 0.06, 1.39, 1.45, -1.3, 1.3);
+    rod('fuel-pumps', [-3.3, 2.0, -2.2], [-3.3, 2.32, -2.2], 0.15);
+    rod('fuel-pumps', [-8.9, 1.95, 0.5], [-8.9, 2.27, 0.5], 0.15);
+    rod('fuel-filter', [-0.8, 1.75, -1.6], [-0.2, 1.75, -1.6], 0.1);
+    tube('fuel-filler-necks', [[-2.8, 2.15, -2.6], [-2.7, 2.9, -2.85], [-2.6, 3.5, -3.05]], 0.1);
+    tube('fuel-filler-necks', [[-8.7, 2.1, -1.1], [-8.7, 2.9, -2.3], [-8.7, 3.5, -3.05]], 0.1);
+    for (const x of [-2.6, -8.7]) add('gas-caps', new THREE.CylinderGeometry(0.17, 0.17, 0.06, 20), [x, 3.5, -3.12], [PI / 2, 0, 0]);
+    for (const s of [1, -1]) rod('o2-sensors', [4.6, 2.15, s * 1.32], [4.6, 2.3, s * 1.55], 0.05);
     for (const s of [1, -1]) {
         tube('exhaust-pipes', [[5.0, 2.7, s * 1.3], [4.6, 2.1, s * 1.25], [4.2, 1.6, s * 0.9], [3.4, 1.5, 0.25]], 0.085);
     }
@@ -636,14 +698,21 @@ async function initViewer() {
 
     // ---- Pointer interaction
 
+    // Parts hidden inside another part, mapped to the part they sit in.
+    const INSIDE = { 'oil-pump': 'oil-pan', 'oil-pickup-tube': 'oil-pan', 'trans-filter': 'trans-pan' };
+
     const raycaster = new THREE.Raycaster();
     const ndc = new THREE.Vector2();
     function pick(e) {
         const r = canvas.getBoundingClientRect();
         ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
         raycaster.setFromCamera(ndc, camera);
-        const hit = raycaster.intersectObjects(pickables, false)[0];
-        return hit ? visuals.get(hit.object.userData.id) : null;
+        const hits = raycaster.intersectObjects(pickables, false);
+        if (!hits.length) return null;
+        // When the pointer is on a part that has another part inside it, pick the inner one.
+        const first = hits[0].object.userData.id;
+        const inner = hits.find(h => INSIDE[h.object.userData.id] === first);
+        return visuals.get((inner ?? hits[0]).object.userData.id);
     }
 
     function setHover(v, e) {

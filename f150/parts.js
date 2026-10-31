@@ -13,7 +13,7 @@
 //   photos        image paths, e.g. ["f150/photos/shocks-1.jpg"]
 //                 or with captions: [{ src: "f150/photos/shocks-1.jpg", caption: "Old vs new" }]
 //
-// To add a part that isn't on the 3D model (spark plugs, belts, etc.),
+// To add a part that isn't on the 3D model (belts, fluids, etc.),
 // copy any entry, give it a new id, and it will appear in the Build Log.
 
 window.F150_BUILD = {
