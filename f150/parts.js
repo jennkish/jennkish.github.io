@@ -110,7 +110,8 @@ window.F150_BUILD = {
     { id: "rear-leaf-springs",   system: "suspension", name: "Rear Leaf Springs",         original: "Factory multi-leaf rear springs",     status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "rear-shocks",         system: "suspension", name: "Rear Shocks",               original: "Factory rear shock absorbers",        status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "front-sway-bar",      system: "suspension", name: "Front Sway Bar",            original: "Factory front stabilizer bar and links", status: "original", replacedWith: "", date: "", notes: "", photos: [] },
-    { id: "rear-sway-bar",       system: "suspension", name: "Rear Sway Bar",             original: "Factory rear stabilizer bar and links",  status: "original", replacedWith: "", date: "", notes: "", photos: [] },
+    { id: "rear-sway-bar",       system: "suspension", name: "Rear Sway Bar",             original: "Factory rear stabilizer bar",            status: "original", replacedWith: "", date: "", notes: "", photos: [] },
+    { id: "rear-sway-bar-links", system: "suspension", name: "Rear Sway Bar Links",       original: "Factory rear stabilizer end links",   status: "original", replacedWith: "", date: "", notes: "", photos: [] },
 
     // ---- Brakes
     { id: "front-brakes", system: "brakes", name: "Front Brakes", original: "Factory disc rotors and calipers",          status: "original", replacedWith: "", date: "", notes: "", photos: [] },
