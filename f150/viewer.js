@@ -397,6 +397,8 @@ async function initViewer() {
     rod('steering-linkage', [7.55, 2.2, -1.6], [4.85, 3.55, -1.4], 0.05);
     rod('power-steering-pump', [7.0, 3.1, -1.0], [7.35, 3.1, -1.0], 0.22);
     rod('power-steering-pump', [7.17, 3.3, -1.0], [7.17, 3.55, -1.0], 0.12);
+    tube('power-steering-lines', [[7.2, 2.9, -1.05], [7.45, 2.6, -1.2], [7.55, 2.3, -1.45], [7.5, 2.2, -1.5]], 0.04);
+    tube('power-steering-lines', [[7.17, 3.4, -0.88], [7.5, 3.0, -1.0], [7.75, 2.5, -1.3], [7.7, 2.2, -1.55]], 0.04);
 
     // Rear axle & suspension
     rod('rear-axle', [REAR_X, WHEEL_Y, -2.25], [REAR_X, WHEEL_Y, 2.25], 0.13);

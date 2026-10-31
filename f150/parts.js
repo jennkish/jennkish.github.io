@@ -108,6 +108,7 @@ window.F150_BUILD = {
     { id: "steering-linkage",   system: "suspension", name: "Tie Rods & Steering Linkage", original: "Factory tie rods, drag link and intermediate shaft", status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "steering-stabilizer", system: "suspension", name: "Steering Stabilizer",       original: "Factory steering damper",             status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "power-steering-pump", system: "suspension", name: "Power Steering Pump",       original: "Factory power steering pump",         status: "original", replacedWith: "", date: "", notes: "", photos: [] },
+    { id: "power-steering-lines", system: "suspension", name: "Power Steering Fluid Lines", original: "Factory pressure and return hoses",  status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "rear-leaf-springs",   system: "suspension", name: "Rear Leaf Springs",         original: "Factory multi-leaf rear springs",     status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "rear-shocks",         system: "suspension", name: "Rear Shocks",               original: "Factory rear shock absorbers",        status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "front-sway-bar",      system: "suspension", name: "Front Sway Bar",            original: "Factory front stabilizer bar and links", status: "original", replacedWith: "", date: "", notes: "", photos: [] },
