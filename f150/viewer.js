@@ -214,7 +214,7 @@ async function initViewer() {
     controls.enablePan = false; // keep the orbit centered on the truck or the selected part
     controls.zoomToCursor = true;
     controls.minDistance = 2.5;
-    controls.maxDistance = 45;
+    controls.maxDistance = 80;
     controls.maxPolarAngle = PI * 0.62;
     controls.autoRotate = !reduceMotion;
     controls.autoRotateSpeed = 0.6;
@@ -799,6 +799,44 @@ async function initViewer() {
     new ResizeObserver(resize).observe(wrap);
     resize();
 
+    // How far back the camera must sit, looking from `dir`, for the whole truck to
+    // fit on screen with room for the chips above and the buttons below.
+    const truckBox = new THREE.Box3().setFromObject(truck);
+    const corners = [];
+    for (const x of [truckBox.min.x, truckBox.max.x])
+        for (const y of [truckBox.min.y, truckBox.max.y])
+            for (const z of [truckBox.min.z, truckBox.max.z]) corners.push(new THREE.Vector3(x, y, z));
+    function fitDistance(dir) {
+        const probe = camera.clone();
+        probe.clearViewOffset();
+        probe.updateProjectionMatrix();
+        let near = 2, far = 120;
+        for (let i = 0; i < 20; i++) {
+            const d = (near + far) / 2;
+            probe.position.copy(HOME_TARGET).addScaledVector(dir, d);
+            probe.lookAt(HOME_TARGET);
+            probe.updateMatrixWorld();
+            const fits = corners.every(c => {
+                const p = c.clone().project(probe);
+                return Math.abs(p.x) < 0.9 && Math.abs(p.y) < 0.72 && p.z < 1;
+            });
+            if (fits) far = d;
+            else near = d;
+        }
+        return far;
+    }
+    // Fit every angle of the auto-rotate spin, not just the starting one.
+    function homePosition(dir = HOME_POS.clone().sub(HOME_TARGET).normalize()) {
+        let dist = 0;
+        for (let i = 0; i < 12; i++) {
+            dist = Math.max(dist, fitDistance(dir.clone().applyAxisAngle(UP, (i / 12) * PI * 2)));
+        }
+        const pos = HOME_TARGET.clone().addScaledVector(dir, dist);
+        pos.y = Math.max(pos.y, 0.5);
+        return pos;
+    }
+    camera.position.copy(homePosition());
+
     let onScreen = true;
     new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; }).observe(wrap);
 
@@ -839,10 +877,7 @@ async function initViewer() {
                 focus(selected);
             } else if (tween || !controls.target.equals(HOME_TARGET)) {
                 // Back to orbiting the middle of the truck, from the current angle.
-                const dir = camera.position.clone().sub(controls.target).normalize();
-                const pos = HOME_TARGET.clone().addScaledVector(dir, HOME_POS.distanceTo(HOME_TARGET));
-                pos.y = Math.max(pos.y, 0.5);
-                flyTo(HOME_TARGET.clone(), pos);
+                flyTo(HOME_TARGET.clone(), homePosition(camera.position.clone().sub(controls.target).normalize()));
             }
         },
         setFilter(id) {
@@ -855,7 +890,7 @@ async function initViewer() {
         },
         reset() {
             controls.autoRotate = !reduceMotion;
-            flyTo(HOME_TARGET.clone(), HOME_POS.clone());
+            flyTo(HOME_TARGET.clone(), homePosition());
         }
     };
 }
