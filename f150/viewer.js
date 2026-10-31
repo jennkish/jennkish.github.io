@@ -85,6 +85,7 @@ function showPanel(p) {
 
     let replaced;
     if (p.replacedWith) replaced = `<dd class="replaced">${esc(p.replacedWith)}</dd>`;
+    else if (k === 'replaced') replaced = '<dd class="replaced">New part</dd>';
     else if (k === 'planned') replaced = '<dd>Planned, part not chosen yet</dd>';
     else if (k === 'in-progress') replaced = '<dd>Work in progress</dd>';
     else replaced = '<dd>Not replaced yet</dd>';
@@ -416,6 +417,7 @@ async function initViewer() {
     // Drivetrain
     rod('transmission', [4.85, 2.4, 0], [4.1, 2.28, 0], 0.78, 0.55);
     rod('transmission', [4.1, 2.28, 0], [1.95, 2.0, 0], 0.48, 0.33);
+    box('trans-mount', 1.95, 2.35, 1.55, 1.72, -0.25, 0.25);
     box('trans-pan', 2.4, 3.9, 1.65, 1.9, -0.4, 0.4);
     box('trans-pan-gasket', 2.34, 3.96, 1.88, 1.93, -0.46, 0.46);
     box('trans-filter', 2.6, 3.7, 1.7, 1.82, -0.3, 0.3);
