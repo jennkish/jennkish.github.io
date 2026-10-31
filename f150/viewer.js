@@ -212,6 +212,7 @@ async function initViewer() {
     controls.target.copy(HOME_TARGET);
     controls.enableDamping = true;
     controls.enablePan = false; // keep the orbit centered on the truck or the selected part
+    controls.zoomToCursor = true;
     controls.minDistance = 2.5;
     controls.maxDistance = 45;
     controls.maxPolarAngle = PI * 0.62;
@@ -754,6 +755,15 @@ async function initViewer() {
     });
     canvas.addEventListener('pointerleave', () => setHover(null));
 
+    // Zooming in heads toward the pointer; zooming out eases the orbit back to the
+    // middle of the truck so it never stays pivoting around one end.
+    canvas.addEventListener('wheel', e => {
+        if (e.deltaY <= 0 || selected) return;
+        const shift = HOME_TARGET.clone().sub(controls.target).multiplyScalar(0.25);
+        controls.target.add(shift);
+        camera.position.add(shift);
+    }, { passive: true });
+
     let down = null;
     canvas.addEventListener('pointerdown', e => {
         down = { x: e.clientX, y: e.clientY };
@@ -817,6 +827,7 @@ async function initViewer() {
     });
 
     refresh();
+
     return {
         has: id => visuals.has(id),
         select(id) {
