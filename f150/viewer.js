@@ -7,7 +7,8 @@ const systemById = new Map(SYSTEMS.map(s => [s.id, s]));
 
 const STATUS = {
     'original':    { label: 'Original',    color: 0x2f7bff },
-    'replaced':    { label: 'Replaced',    color: 0xffb13d },
+    // holo: a deeper shade for the 3D model, where the glow washes light colors out
+    'replaced':    { label: 'Replaced',    color: 0xffb13d, holo: 0xff8000 },
     'in-progress': { label: 'In Progress', color: 0x38e1ff },
     'planned':     { label: 'Planned',     color: 0x9aa4bd }
 };
@@ -639,17 +640,26 @@ async function initViewer() {
     let hovered = null;
     let selected = null;
     let systemFilter = 'all';
-    let statusColors = false;
+    let statusColors = true;
 
     function refresh() {
         for (const v of visuals.values()) {
             const sys = v.data.system;
             const ghost = systemFilter !== 'all' && sys !== systemFilter;
             const shell = systemFilter === 'all' && sys === 'body';
-            let color = statusColors ? new THREE.Color(STATUS[statusKey(v.data)].color) : HOLO;
+            const st = STATUS[statusKey(v.data)];
+            let color = statusColors ? new THREE.Color(st.holo ?? st.color) : HOLO;
             let opacity = shell ? 0.5 : 1;
             let line = shell ? 0.35 : 0.5;
             let glowAmt = 1.2;
+            // Blue parts add onto the replaced parts' orange and turn it pink, so keep them dimmer.
+            if (statusColors && st !== STATUS.replaced) {
+                opacity *= 0.5;
+                line *= 0.6;
+            } else if (statusColors) {
+                opacity *= 0.8;
+                glowAmt = 0.9;
+            }
             if (ghost) {
                 opacity = 0.08;
                 line = 0.035;
