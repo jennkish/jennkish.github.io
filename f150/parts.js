@@ -96,7 +96,7 @@ window.F150_BUILD = {
     { id: "driveshaft-yoke",  system: "drivetrain", name: "Driveshaft Yoke",              original: "Factory driveshaft slip yoke",                   status: "replaced", replacedWith: "", date: "", notes: "", photos: ["f150/photos/driveshaft yoke.png"] },
     { id: "carrier-bearing",  system: "drivetrain", name: "Carrier Bearing",              original: "Factory driveshaft center support bearing",      status: "replaced", replacedWith: "", date: "", notes: "", photos: ["f150/photos/carrier bearing.jpg"] },
     { id: "front-axle",       system: "drivetrain", name: "Front Axle & Differential (Dana 44 TTB)", original: "Factory Dana 44 Twin Traction Beam front axle", status: "original", replacedWith: "", date: "", notes: "", photos: [] },
-    { id: "axle-ujoints",     system: "drivetrain", name: "Front Axle U-Joints",          original: "Factory front axle shaft universal joints",      status: "original", replacedWith: "", date: "", notes: "", photos: [] },
+    { id: "axle-ujoints",     system: "drivetrain", name: "Front Axle U-Joints",          original: "Factory front axle shaft universal joints",      status: "replaced", replacedWith: "", date: "", notes: "", photos: ["f150/photos/front axle u joints.jpg"] },
     { id: "locking-hubs",     system: "drivetrain", name: "Front Locking Hubs",           original: "Factory front locking hubs",                     status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "rear-axle",        system: "drivetrain", name: "Rear Axle & Differential",     original: "Ford 8.8\" rear axle",                           status: "original", replacedWith: "", date: "", notes: "", photos: [] },
 
