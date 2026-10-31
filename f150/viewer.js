@@ -405,6 +405,7 @@ async function initViewer() {
     // Rear axle & suspension
     rod('rear-axle', [REAR_X, WHEEL_Y, -2.25], [REAR_X, WHEEL_Y, 2.25], 0.13);
     add('rear-axle', new THREE.SphereGeometry(0.45, 20, 14), [REAR_X, WHEEL_Y, 0.15]);
+    add('rear-diff-cover', new THREE.CylinderGeometry(0.4, 0.4, 0.1, 24), [REAR_X - 0.45, WHEEL_Y, 0.15], [0, 0, PI / 2]);
     rod('rear-axle', [REAR_X, 1.25, 0.15], [-6.25, 1.3, 0.15], 0.16, 0.12);
     for (const s of [1, -1]) {
         [0, 1, 2].forEach(i => tube('rear-leaf-springs', [
