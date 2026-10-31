@@ -4,8 +4,8 @@
     --muted: #8fa7c7;
     --panel-bg: rgba(4, 10, 22, 0.88);
     --status-original: #2f7bff;
-    --status-replaced: #38e1ff;
-    --status-in-progress: #ffb13d;
+    --status-replaced: #ffb13d;
+    --status-in-progress: #38e1ff;
     --status-planned: #9aa4bd;
 }
 

@@ -7,8 +7,8 @@ const systemById = new Map(SYSTEMS.map(s => [s.id, s]));
 
 const STATUS = {
     'original':    { label: 'Original',    color: 0x2f7bff },
-    'replaced':    { label: 'Replaced',    color: 0x38e1ff },
-    'in-progress': { label: 'In Progress', color: 0xffb13d },
+    'replaced':    { label: 'Replaced',    color: 0xffb13d },
+    'in-progress': { label: 'In Progress', color: 0x38e1ff },
     'planned':     { label: 'Planned',     color: 0x9aa4bd }
 };
 
