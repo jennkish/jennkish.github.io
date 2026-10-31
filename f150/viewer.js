@@ -389,7 +389,7 @@ async function initViewer() {
     }
     box('steering-gearbox', 7.35, 7.85, 1.75, 2.2, -1.85, -1.4);
     rod('steering-linkage', [6.55, 1.15, -2.15], [6.55, 1.15, 2.15], 0.045);
-    rod('steering-linkage', [7.6, 1.75, -1.62], [7.6, 1.45, -1.7], 0.06);
+    rod('pitman-arm', [7.6, 1.75, -1.62], [7.6, 1.45, -1.7], 0.06);
     rod('steering-linkage', [7.6, 1.45, -1.7], [6.6, 1.18, 1.3], 0.05);
     rod('steering-linkage', [7.55, 2.2, -1.6], [4.85, 3.55, -1.4], 0.05);
     rod('power-steering-pump', [7.0, 3.1, -1.0], [7.35, 3.1, -1.0], 0.22);
