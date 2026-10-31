@@ -312,10 +312,17 @@
     margin: 0;
 }
 
+.panel-photos figure:only-child{
+    grid-column: 1 / -1;
+}
+
+/* Fit the whole photo in the frame; most are product shots on white. */
 .panel-photos img{
+    display: block;
     width: 100%;
     aspect-ratio: 4 / 3;
-    object-fit: cover;
+    object-fit: contain;
+    background: #fff;
     border-radius: 1rem;
     border: 1px solid rgba(84, 151, 228, 0.4);
 }
