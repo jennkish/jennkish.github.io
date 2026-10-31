@@ -99,7 +99,7 @@ window.F150_BUILD = {
     { id: "axle-ujoints",     system: "drivetrain", name: "Front Axle U-Joints",          original: "Factory front axle shaft universal joints",      status: "replaced", replacedWith: "", date: "", notes: "", photos: ["f150/photos/front axle u joints.jpg"] },
     { id: "locking-hubs",     system: "drivetrain", name: "Front Locking Hubs",           original: "Factory front locking hubs",                     status: "original", replacedWith: "", date: "", notes: "", photos: [] },
     { id: "rear-axle",        system: "drivetrain", name: "Rear Axle & Differential",     original: "Ford 8.8\" rear axle",                           status: "original", replacedWith: "", date: "", notes: "", photos: [] },
-    { id: "rear-diff-cover",  system: "drivetrain", name: "Rear Differential Cover",      original: "Factory stamped steel differential cover",       status: "original", replacedWith: "", date: "", notes: "", photos: [] },
+    { id: "rear-diff-cover",  system: "drivetrain", name: "Rear Differential Cover",      original: "Factory stamped steel differential cover",       status: "replaced", replacedWith: "", date: "", notes: "", photos: ["f150/photos/rear diff cover.jpg"] },
 
     // ---- Suspension & Steering
     { id: "front-springs",       system: "suspension", name: "Front Coil Springs",        original: "Factory front coil springs",          status: "original", replacedWith: "", date: "", notes: "", photos: [] },
