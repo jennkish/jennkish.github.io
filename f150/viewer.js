@@ -211,6 +211,7 @@ async function initViewer() {
     const controls = new OrbitControls(camera, canvas);
     controls.target.copy(HOME_TARGET);
     controls.enableDamping = true;
+    controls.enablePan = false; // keep the orbit centered on the truck or the selected part
     controls.minDistance = 2.5;
     controls.maxDistance = 45;
     controls.maxPolarAngle = PI * 0.62;
@@ -816,7 +817,6 @@ async function initViewer() {
     });
 
     refresh();
-
     return {
         has: id => visuals.has(id),
         select(id) {
@@ -826,6 +826,12 @@ async function initViewer() {
             if (selected) {
                 controls.autoRotate = false;
                 focus(selected);
+            } else if (tween || !controls.target.equals(HOME_TARGET)) {
+                // Back to orbiting the middle of the truck, from the current angle.
+                const dir = camera.position.clone().sub(controls.target).normalize();
+                const pos = HOME_TARGET.clone().addScaledVector(dir, HOME_POS.distanceTo(HOME_TARGET));
+                pos.y = Math.max(pos.y, 0.5);
+                flyTo(HOME_TARGET.clone(), pos);
             }
         },
         setFilter(id) {
